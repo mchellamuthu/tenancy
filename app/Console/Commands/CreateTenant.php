@@ -70,7 +70,8 @@ class CreateTenant extends Command
         ));
         $tenant->connect();
         tenant_migrate();
-        \App\Models\Tenants\User::factory(200)->create();
+        $rand = mt_rand(50,200);
+        \App\Models\Tenants\User::factory($rand)->create();
 
         $this->info('Tenant was created successful!');
 
