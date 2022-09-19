@@ -69,7 +69,7 @@ class CreateTenant extends Command
             'utf8mb4_unicode_ci'
         ));
         $tenant->connect();
-        tenant_migrate();
+        $tenant->migrate();
         $rand = mt_rand(50,200);
         \App\Models\Tenants\User::factory($rand)->create();
 
