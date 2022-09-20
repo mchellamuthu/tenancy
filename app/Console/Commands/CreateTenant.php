@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use PDO;
 use App\Models\Tenant;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class CreateTenant extends Command
 {
@@ -41,18 +42,14 @@ class CreateTenant extends Command
         $data['db_password'] = $dbpassword;
 
 
-        $pdo = $this->getPDOConnection(
-            $dbhost,
-            $dbport,
-            $dbusername,
-            $dbpassword
-        );
+
         //Store database name
         $dbname = $this->getRealName($tenantName);
         $tenantExists = Tenant::where('name', $dbname)->first();
         if ($tenantExists) {
             $this->error('Tenant already exists!');
             return 0;
+
         }
         $tenant = Tenant::create([
             'name' => $dbname,
@@ -62,12 +59,14 @@ class CreateTenant extends Command
             'db_password' => $dbpassword,
         ]);
 
-        $pdo->exec(sprintf(
-            'CREATE DATABASE IF NOT EXISTS %s CHARACTER SET %s COLLATE %s;',
-            $dbname,
-            'utf8mb4',
-            'utf8mb4_unicode_ci'
-        ));
+        $statement = sprintf(
+                'CREATE DATABASE IF NOT EXISTS %s CHARACTER SET %s COLLATE %s;',
+                $dbname,
+                'utf8mb4',
+                'utf8mb4_unicode_ci'
+        );
+        DB::connection('tenant')->statement($statement);
+
         $tenant->connect();
         $tenant->migrate();
         $rand = mt_rand(50,200);
@@ -76,18 +75,6 @@ class CreateTenant extends Command
         $this->info('Tenant was created successful!');
 
         return 0;
-    }
-
-    /**
-     * @param  string $host
-     * @param  integer $port
-     * @param  string $username
-     * @param  string $password
-     * @return PDO
-     */
-    private function getPDOConnection($host, $port, $username, $password)
-    {
-        return new PDO(sprintf('mysql:host=%s;port=%d;', $host, $port), $username, $password);
     }
 
     private  function getRealName($str)
