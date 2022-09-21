@@ -71,7 +71,9 @@ class CreateTenant extends Command
         $tenant->migrate();
         $rand = mt_rand(50,200);
         \App\Models\Tenants\User::factory($rand)->create();
-
+        $this->call('queue:work', [
+            '--tries' => 3, '--queue' => $dbname
+        ]);
         $this->info('Tenant was created successful!');
 
         return 0;

@@ -15,16 +15,13 @@ use Illuminate\Contracts\Queue\ShouldBeUnique;
 class AddUsersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    public $tenant;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Tenant $tenant)
+    public function __construct()
     {
-        $this->tenant = $tenant;
-
     }
 
     /**
@@ -34,12 +31,11 @@ class AddUsersJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->tenant->connect();
         \App\Models\Tenants\User::factory(20)->create();
     }
 
     public function tags()
     {
-        return ["tenant : ".$this->tenant->name];
+        return ["tenant : ", $this->job->payload()['tenant']];
     }
 }

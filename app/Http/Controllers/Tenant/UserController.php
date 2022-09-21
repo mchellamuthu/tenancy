@@ -13,11 +13,8 @@ class UserController extends Controller
     public function __invoke(Request $request)
     {
         $tenant_name = $request->route()->originalParameter('tenant');
-        $tenant = Tenant::where('name',$tenant_name)->first();
-        AddUsersJob::dispatch($tenant);
+        AddUsersJob::dispatch();
         $users = User::count();
-
-        return response()->json(['users'=>$users]);
+        return response()->json(['users' => $users]);
     }
-
 }

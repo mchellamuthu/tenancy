@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3cd4b0b1b10e50635178f71d8d1c2ca",
+    "content-hash": "7c5590e974fdc26b3829a39312ac1039",
     "packages": [
         {
             "name": "brick/math",
@@ -896,6 +896,67 @@
                 }
             ],
             "time": "2022-08-28T14:45:39+00:00"
+        },
+        {
+            "name": "huangdijia/laravel-horizon-restart",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/huangdijia/laravel-horizon-restart.git",
+                "reference": "f1ba02c413257656267e68a560dd1075d0fdb3a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/huangdijia/laravel-horizon-restart/zipball/f1ba02c413257656267e68a560dd1075d0fdb3a3",
+                "reference": "f1ba02c413257656267e68a560dd1075d0fdb3a3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^9.0",
+                "illuminate/console": "^9.0",
+                "illuminate/support": "^9.0",
+                "laravel/horizon": "^5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "orchestra/testbench": "^7.0",
+                "phpstan/phpstan": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Huangdijia\\Horizon\\RestartServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Huangdijia\\Horizon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "huangdijia",
+                    "email": "huangdijia@gmail.com"
+                }
+            ],
+            "description": "horizon-restart for laravel",
+            "homepage": "https://github.com/huangdijia/laravel-horizon-restart",
+            "keywords": [
+                "laravel",
+                "migrate",
+                "recreate"
+            ],
+            "support": {
+                "issues": "https://github.com/huangdijia/laravel-horizon-restart/issues",
+                "source": "https://github.com/huangdijia/laravel-horizon-restart/tree/2.0.0"
+            },
+            "time": "2022-04-18T06:18:57+00:00"
         },
         {
             "name": "laravel/framework",

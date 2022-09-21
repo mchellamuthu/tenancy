@@ -35,6 +35,8 @@ class Tenant extends Model
             DB::reconnect('tenant');
             // Ping the database. This will throw an exception in case the database does not exists.
             Schema::connection('tenant')->getConnection()->reconnect();
+
+            return $this;
         }
     }
     /**
@@ -50,10 +52,17 @@ class Tenant extends Model
             $connection['database'] == $this->db_name;
     }
 
-     /**
+    public function use()
+    {
+        app()->forgetInstance('tenant');
+        app()->instance('tenant',$this);
+        return $this;
+    }
+
+    /**
      * Run Tenant Migrations in the connected tenant database.
      */
-   public function migrate()
+    public function migrate()
     {
 
         Artisan::call('migrate', [
