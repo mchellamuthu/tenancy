@@ -36,6 +36,6 @@ class AddUsersJob implements ShouldQueue
 
     public function tags()
     {
-        return ["tenant : ", $this->job->payload()['tenant']];
+        return ["tenant : ".$this->queue];
     }
 }

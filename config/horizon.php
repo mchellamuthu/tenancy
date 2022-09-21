@@ -167,7 +167,7 @@ return [
     'defaults' => [
         'supervisor-1' => [
             'connection' => 'redis',
-            'queue' => ['default','sadsad'],
+            'queue' => ['default'],
             'balance' => 'auto',
             'maxProcesses' => 1,
             'maxTime' => 0,
@@ -177,30 +177,7 @@ return [
             'timeout' => 60,
             'nice' => 0,
         ],
-        'supervisor-2' => [
-            'connection' => 'redis',
-            'queue' => ['tenants'],
-            'balance' => 'auto',
-            'maxProcesses' => 1,
-            'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 1,
-            'timeout' => 60,
-            'nice' => 0,
-        ],
-        'supervisor-3' => [
-            'connection' => 'redis',
-            'queue' => ['ass'],
-            'balance' => 'auto',
-            'maxProcesses' => 1,
-            'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 1,
-            'timeout' => 60,
-            'nice' => 0,
-        ],
+    
     ],
 
     'environments' => [
